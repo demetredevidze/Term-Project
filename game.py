@@ -1,3 +1,7 @@
+# Demetre Devidze
+# Term Project
+
+
 import pygame
 import random
 import time
@@ -41,8 +45,12 @@ redFishImg = pygame.image.load("redfish.png")
 yellowFishImg = pygame.image.load("yellowfish.png")
 tunaFishImg = pygame.image.load("tunafish.png")
 angelFishImg = pygame.image.load("angelfish.png")
-buttonImg1 = pygame.image.load("startButton1.png")
-buttonImg2 = pygame.image.load("startButton2.png")
+startButtonImg1 = pygame.image.load("startButton1.png")
+startButtonImg2 = pygame.image.load("startButton2.png")
+exitButtonImg1 = pygame.image.load("exitButton1.png")
+exitButtonImg2 = pygame.image.load("exitButton2.png")
+continueButtonImg1 = pygame.image.load("continueButton1.png")
+continueButtonImg2 = pygame.image.load("continueButton2.png")
 mixer.music.load("waterSound.mp3")
 
 
@@ -60,6 +68,12 @@ bubbleSmallHeight = 6
 
 startButtonWidth = 200
 startButtonHeight = 50
+
+exitButtonWidth = 100
+exitButtonHeight = 50
+
+continueButtonWidth = 130
+continueButtonHeight = 50
 
 fishWidth = round(displayWidth/6)
 fishHeight = round(displayHeight/9)
@@ -128,8 +142,6 @@ def tunaFish(x, y):
     gameDisplay.blit(pygame.transform.scale(tunaFishImg, (preyFishWidth, preyFishHeight)), (x,y))
 
 
-
-
 ###############################################################################
 
 
@@ -153,16 +165,64 @@ def gameIntro():
 
         click = pygame.mouse.get_pressed()
 
-
-        if 300 <= mouse[0] <= (300+startButtonWidth) and 400 <= mouse[1] <= (400+startButtonHeight):
-            gameDisplay.blit(buttonImg2, (300,400))
+        if 150 <= mouse[0] <= (150+startButtonWidth) and 400 <= mouse[1] <= (400+startButtonHeight):
+            gameDisplay.blit(startButtonImg2, (150,400))
+            gameDisplay.blit(exitButtonImg1, (500,400))
             if click[0] == 1:
                 game_loop()
+
+        elif 500 <= mouse[0] <= (500+exitButtonWidth) and 400 <= mouse[1] <= (400+exitButtonHeight):
+            gameDisplay.blit(exitButtonImg2, (500,400))
+            gameDisplay.blit(startButtonImg1, (150,400))
+            if click[0] == 1:
+                pygame.quit()
+                quit()
+
         else:
-            gameDisplay.blit(buttonImg1, (300,400))
+            gameDisplay.blit(startButtonImg1, (150,400))
+            gameDisplay.blit(exitButtonImg1, (500,400))
+
+        pygame.display.update()
+        clock.tick(60)
 
 
+def gamePause():
 
+    pause = True
+
+    while pause:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    pause = False
+
+        mouse = pygame.mouse.get_pos()
+
+        largeText = pygame.font.Font("freesansbold.ttf", 50)
+        TextSurf, TextRect = text_objects("Paused", largeText)
+        TextRect.center = ((displayWidth//2),(displayHeight//2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        click = pygame.mouse.get_pressed()
+        if 200 <= mouse[0] <= (350+continueButtonWidth) and 400 <= mouse[1] <= (400+continueButtonHeight):
+            gameDisplay.blit(continueButtonImg2, (200,400))
+            gameDisplay.blit(exitButtonImg1, (500,400))
+            if click[0] == 1:
+                pause = False
+
+        elif 500 <= mouse[0] <= (500+exitButtonWidth) and 400 <= mouse[1] <= (400+exitButtonHeight):
+            gameDisplay.blit(exitButtonImg2, (500,400))
+            gameDisplay.blit(continueButtonImg1, (200,400))
+            if click[0] == 1:
+                pygame.quit()
+                quit()
+
+        else:
+            gameDisplay.blit(continueButtonImg1, (200,400))
+            gameDisplay.blit(exitButtonImg1, (500,400))
 
         pygame.display.update()
         clock.tick(60)
@@ -279,6 +339,7 @@ def game_loop():
     shark4Speed = random.randint(3,10)
     shark4Startx = displayWidth + shark4Width
 
+
     sharkSmartStarty = random.randint(-sharkSmartHeight, displayHeight)
     sharkSmartSpeed = random.randint(3,8)
     sharkSmartStartx = displayWidth + sharkSmartWidth
@@ -296,16 +357,13 @@ def game_loop():
     blackFishSpeed = random.randint(4,10)
     blackFishStartx = displayWidth + preyFishWidth
 
-
     redFishStarty = random.randint(-preyFishHeight, displayHeight)
     redFishSpeed = random.randint(4,10)
     redFishStartx = displayWidth + preyFishWidth
 
-
     yellowFishStarty = random.randint(-preyFishHeight, displayHeight)
     yellowFishSpeed = random.randint(4,10)
     yellowFishStartx = displayWidth + preyFishWidth
-
 
     angelFishStarty = random.randint(-preyFishHeight, displayHeight)
     angelFishSpeed = random.randint(4,10)
@@ -347,6 +405,8 @@ def game_loop():
                     yMove = -5
                 elif event.key == pygame.K_DOWN:
                     yMove = 5
+                elif event.key == pygame.K_p:
+                    gamePause()
 
             if event.type == pygame.KEYUP:
                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
