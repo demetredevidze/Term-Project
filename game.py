@@ -13,32 +13,25 @@ from pygame import mixer
 
 pygame.init()
 
-
-displayWidth = 800
-displayHeight = 600
-
 black = (0,0,0)
 white = (255,255,255)
-red = (255,0,0)
-green = (0,255,0)
-blue = (0,0,255)
 
 
+displayWidth = 1000
+displayHeight = 650
 gameDisplay = pygame.display.set_mode((displayWidth,displayHeight), pygame.RESIZABLE)
-pygame.display.set_caption("Fish Nemo")
+pygame.display.set_caption("Nemo")
 clock = pygame.time.Clock()
 
 
 bg = pygame.image.load("ocean.jpg")
-fishImg = pygame.image.load("nemo.png")
+nemoImg = pygame.image.load("nemo.png")
 shark1Img = pygame.image.load("shark1.png")
 shark2Img = pygame.image.load("shark2.png")
 shark3Img = pygame.image.load("shark3.png")
 shark4Img = pygame.image.load("shark4.png")
 sharkSmartImg = pygame.image.load("sharksmart.png")
-bubbleLargeImg = pygame.image.load("bubbleLarge.png")
-bubbleMediumImg = pygame.image.load("bubbleMedium.png")
-bubbleSmallImg = pygame.image.load("bubbleSmall.png")
+bubbleImg = pygame.image.load("bubble.png")
 goldFishImg = pygame.image.load("goldfish.png")
 blackFishImg = pygame.image.load("blackfish.png")
 redFishImg = pygame.image.load("redfish.png")
@@ -51,142 +44,127 @@ exitButtonImg1 = pygame.image.load("exitButton1.png")
 exitButtonImg2 = pygame.image.load("exitButton2.png")
 continueButtonImg1 = pygame.image.load("continueButton1.png")
 continueButtonImg2 = pygame.image.load("continueButton2.png")
+restartButtonImg1 = pygame.image.load("restart1.png")
+restartButtonImg2 = pygame.image.load("restart2.png")
+menuButtonImg1 = pygame.image.load("menu1.png")
+menuButtonImg2 = pygame.image.load("menu2.png")
+shopButtonImg1 = pygame.image.load("shop1.png")
+shopButtonImg2 = pygame.image.load("shop2.png")
+goldCoinImg = pygame.image.load("goldcoin.png")
+ripImg = pygame.image.load("rip.png")
+bubbleSound = mixer.Sound("bubbles.wav")
+bubbleSound.set_volume(0.01)
+biteSound = mixer.Sound("bite.mp3")
 mixer.music.load("waterSound.mp3")
+pygame.mixer.music.set_volume(0.03)
 
 
 ###############################################################################
 
-
-bubbleLargeWidth = 18
-bubbleLargeHeight = 18
-
-bubbleMediumWidth = 12
-bubbleMediumHeight = 12
-
-bubbleSmallWidth = 6
-bubbleSmallHeight = 6
-
-startButtonWidth = 200
-startButtonHeight = 50
-
-exitButtonWidth = 100
-exitButtonHeight = 50
-
-continueButtonWidth = 130
-continueButtonHeight = 50
-
-fishWidth = round(displayWidth/6)
-fishHeight = round(displayHeight/9)
-
-goldFishWidth = round(displayWidth/8)
-goldFishHeight = round(displayHeight/12)
-
-preyFishWidth = round(displayWidth/11)
-preyFishHeight = round(displayHeight/13)
-
+def sharks(x, y, sharksWidth, sharksHeight, sharksImg):
+    gameDisplay.blit(pygame.transform.scale(sharksImg, (sharksWidth, sharksHeight)), (x,y))
 
 ###############################################################################
-
-
-def shark1(x, y, shark1Width, shark1Height):
-    gameDisplay.blit(pygame.transform.scale(shark1Img, (shark1Width, shark1Height)), (x,y))
-
-def shark2(x, y, shark2Width, shark2Height):
-    gameDisplay.blit(pygame.transform.scale(shark2Img, (shark2Width, shark2Height)), (x,y))
-
-def shark3(x, y, shark3Width, shark3Height):
-    gameDisplay.blit(pygame.transform.scale(shark3Img, (shark3Width, shark3Height)), (x,y))
-
-def shark4(x, y, shark4Width, shark4Height):
-    gameDisplay.blit(pygame.transform.scale(shark4Img, (shark4Width, shark4Height)), (x,y))
 
 def sharkSmart(x, y, sharkSmartWidth, sharkSmartHeight):
     gameDisplay.blit(pygame.transform.scale(sharkSmartImg, (sharkSmartWidth, sharkSmartHeight)), (x,y))
 
+###############################################################################
+
+def bubbles(x, y, size):
+    gameDisplay.blit(pygame.transform.scale(bubbleImg, (size, size)), (x,y))
 
 ###############################################################################
 
-
-def bubbleLarge(x, y):
-    gameDisplay.blit(bubbleLargeImg, (x,y))
-
-def bubbleMedium(x, y):
-    gameDisplay.blit(bubbleMediumImg, (x,y))
-
-def bubbleSmall(x, y):
-    gameDisplay.blit(bubbleSmallImg, (x,y))
-
+def Nemo(nemox, nemoy,nemoWidth, nemoHeight, increaseWidth=0, increaseHeight=0):
+    gameDisplay.blit(pygame.transform.scale(nemoImg, (nemoWidth+increaseWidth, nemoHeight+increaseHeight)), (nemox,nemoy))
 
 ###############################################################################
 
+def preyFish(x, y, preyFishImg, preyFishWidth, preyFishHeight):
+    gameDisplay.blit(pygame.transform.scale(preyFishImg, (preyFishWidth, preyFishHeight)), (x,y))
 
-def fish(x, y, increaseWidth=0, increaseHeight=0):
-    gameDisplay.blit(pygame.transform.scale(fishImg, (fishWidth+increaseWidth, fishHeight+increaseHeight)), (x,y))
+###############################################################################
 
-def goldFish(x, y):
+def goldFish(x, y, goldFishWidth, goldFishHeight):
     gameDisplay.blit(pygame.transform.scale(goldFishImg, (goldFishWidth, goldFishHeight)), (x,y))
 
-def blackFish(x, y):
-    gameDisplay.blit(pygame.transform.scale(blackFishImg, (preyFishWidth, preyFishHeight)), (x,y))
+###############################################################################
 
-def redFish(x, y):
-    gameDisplay.blit(pygame.transform.scale(redFishImg, (preyFishWidth, preyFishHeight)), (x,y))
-
-def yellowFish(x, y):
-    gameDisplay.blit(pygame.transform.scale(yellowFishImg, (preyFishWidth, preyFishHeight)), (x,y))
-
-def angelFish(x, y):
-    gameDisplay.blit(pygame.transform.scale(angelFishImg, (preyFishWidth, preyFishHeight)), (x,y))
-
-def tunaFish(x, y):
-    gameDisplay.blit(pygame.transform.scale(tunaFishImg, (preyFishWidth, preyFishHeight)), (x,y))
-
+def goldCoin(displayWidth, displayHeight):
+    gameDisplay.blit(pygame.transform.scale(goldCoinImg, (displayWidth//20, displayWidth//20)), (displayWidth//3.5,0))
 
 ###############################################################################
 
 
-def gameIntro():
+def gameIntro(displayWidth, displayHeight, intro = True):
 
-    intro = True
 
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+            if event.type == pygame.VIDEORESIZE:
+                displayWidth = event.w
+                displayHeight = event.h
 
         mouse = pygame.mouse.get_pos()
 
-        gameDisplay.blit(bg, (0,0))
-        largeText = pygame.font.Font("freesansbold.ttf", 50)
-        TextSurf, TextRect = text_objects("Welcome to Fish Nemo", largeText)
-        TextRect.center = ((displayWidth//2),(displayHeight//2))
+        startButtonWidth = displayWidth//5
+        buttonHeight = displayHeight//13
+        exitButtonWidth = displayWidth//10
+        continueButtonWidth = displayWidth//8
+        shopButtonWidth = displayWidth//8
+
+        exitStart = displayWidth - displayWidth//4
+        startStart = displayWidth//4 - exitButtonWidth
+        buttonsY = displayHeight//1.6
+        shopStart = displayWidth//2
+
+        gameDisplay.blit(pygame.transform.scale(bg, (displayWidth, displayHeight)), (0,0))
+        largeText = pygame.font.Font("freesansbold.ttf", displayWidth//20)
+        TextSurf, TextRect = textObjects("Welcome to Nemo", largeText)
+        TextRect.center = ((displayWidth//2),(displayHeight//2.5))
         gameDisplay.blit(TextSurf, TextRect)
 
         click = pygame.mouse.get_pressed()
 
-        if 150 <= mouse[0] <= (150+startButtonWidth) and 400 <= mouse[1] <= (400+startButtonHeight):
-            gameDisplay.blit(startButtonImg2, (150,400))
-            gameDisplay.blit(exitButtonImg1, (500,400))
+        if startStart <= mouse[0] <= (startStart+startButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(startButtonImg2, (startButtonWidth,buttonHeight)),(startStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth, buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(shopButtonImg1, (shopButtonWidth, buttonHeight)),(shopStart,buttonsY))
+            time.sleep(0.01)
+            pygame.display.update()
             if click[0] == 1:
-                game_loop()
+                intro = False
 
-        elif 500 <= mouse[0] <= (500+exitButtonWidth) and 400 <= mouse[1] <= (400+exitButtonHeight):
-            gameDisplay.blit(exitButtonImg2, (500,400))
-            gameDisplay.blit(startButtonImg1, (150,400))
+        elif exitStart <= mouse[0] <= (exitStart+exitButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg2, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(startButtonImg1, (startButtonWidth, buttonHeight)),(startStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(shopButtonImg1, (shopButtonWidth, buttonHeight)),(shopStart,buttonsY))
             if click[0] == 1:
                 pygame.quit()
                 quit()
 
+        elif shopStart <= mouse[0] <= (shopStart+shopButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(startButtonImg1, (startButtonWidth, buttonHeight)),(startStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(shopButtonImg2, (shopButtonWidth, buttonHeight)),(shopStart,buttonsY))
+
+
         else:
-            gameDisplay.blit(startButtonImg1, (150,400))
-            gameDisplay.blit(exitButtonImg1, (500,400))
+            gameDisplay.blit(pygame.transform.scale(startButtonImg1, (startButtonWidth, buttonHeight)),(startStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth, buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(shopButtonImg1, (shopButtonWidth, buttonHeight)),(shopStart,buttonsY))
 
         pygame.display.update()
         clock.tick(60)
 
+###############################################################################
 
-def gamePause():
+def gamePause(displayWidth, displayHeight):
+
 
     pause = True
 
@@ -198,194 +176,257 @@ def gamePause():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     pause = False
+            if event.type == pygame.VIDEORESIZE:
+                displayWidth = event.w
+                displayHeight = event.h
 
         mouse = pygame.mouse.get_pos()
 
-        largeText = pygame.font.Font("freesansbold.ttf", 50)
-        TextSurf, TextRect = text_objects("Paused", largeText)
+        startButtonWidth = displayWidth//5
+        buttonHeight = displayHeight//13
+        exitButtonWidth = displayWidth//10
+        continueButtonWidth = displayWidth//8
+        menuButtonWidth = displayWidth//8
+
+        exitStart = displayWidth - displayWidth//4
+        continueStart = displayWidth//4 - exitButtonWidth
+        buttonsY = displayHeight//1.6
+        menuStart = displayWidth//2 - menuButtonWidth//2
+
+        gameDisplay.blit(pygame.transform.scale(bg, (displayWidth, displayHeight)), (0,0))
+
+        largeText = pygame.font.Font("freesansbold.ttf", displayWidth//20)
+        TextSurf, TextRect = textObjects("Paused", largeText)
         TextRect.center = ((displayWidth//2),(displayHeight//2))
         gameDisplay.blit(TextSurf, TextRect)
 
         click = pygame.mouse.get_pressed()
-        if 200 <= mouse[0] <= (350+continueButtonWidth) and 400 <= mouse[1] <= (400+continueButtonHeight):
-            gameDisplay.blit(continueButtonImg2, (200,400))
-            gameDisplay.blit(exitButtonImg1, (500,400))
+        if continueStart <= mouse[0] <= (continueStart+continueButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(continueButtonImg2, (continueButtonWidth,buttonHeight)), (continueStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            time.sleep(0.01)
             if click[0] == 1:
                 pause = False
 
-        elif 500 <= mouse[0] <= (500+exitButtonWidth) and 400 <= mouse[1] <= (400+exitButtonHeight):
-            gameDisplay.blit(exitButtonImg2, (500,400))
-            gameDisplay.blit(continueButtonImg1, (200,400))
+        elif exitStart <= mouse[0] <= (exitStart+exitButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg2, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(continueButtonImg1, (continueButtonWidth,buttonHeight)),(continueStart,buttonsY))
             if click[0] == 1:
                 pygame.quit()
                 quit()
 
+        elif menuStart <= mouse[0] <= (menuStart+menuButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(continueButtonImg1, (continueButtonWidth, buttonHeight)),(continueStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg2, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            if click[0] == 1:
+               game_loop(True,displayWidth,displayHeight)
+
         else:
-            gameDisplay.blit(continueButtonImg1, (200,400))
-            gameDisplay.blit(exitButtonImg1, (500,400))
+            gameDisplay.blit(pygame.transform.scale(continueButtonImg1, (continueButtonWidth,buttonHeight)),(continueStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
 
         pygame.display.update()
         clock.tick(60)
 
 
-def displayScore(score):
-    font = pygame.font.SysFont(None, 35)
+
+def crash(displayWidth, displayHeight):
+
+    crash = True
+
+    while crash:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    pause = False
+            if event.type == pygame.VIDEORESIZE:
+                displayWidth = event.w
+                displayHeight = event.h
+
+        mouse = pygame.mouse.get_pos()
+
+        buttonHeight = displayHeight//13
+        exitButtonWidth = displayWidth//10
+        restartButtonWidth = displayWidth//8
+        menuButtonWidth = displayWidth//8
+
+        exitStart = displayWidth - displayWidth//4
+        restartStart = displayWidth//4 - exitButtonWidth
+        buttonsY = displayHeight//1.6
+        menuStart = displayWidth//2 - menuButtonWidth//2
+
+
+        gameDisplay.blit(pygame.transform.scale(bg, (displayWidth, displayHeight)), (0,0))
+
+        largeText = pygame.font.Font("freesansbold.ttf", displayWidth//20)
+        TextSurf, TextRect = textObjects("You got eaten by a shark", largeText)
+        TextRect.center = ((displayWidth//2),(displayHeight//2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        gameDisplay.blit(pygame.transform.scale(ripImg, (displayWidth//4,displayWidth//4)), (displayWidth//2-(displayWidth//4)//2,displayHeight//15))
+
+        click = pygame.mouse.get_pressed()
+
+        if restartStart <= mouse[0] <= (restartStart+restartButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(restartButtonImg2, (restartButtonWidth,buttonHeight)),(restartStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            if click[0] == 1:
+                time.sleep(0.1)
+                game_loop(False,displayWidth,displayHeight)
+
+        elif exitStart <= mouse[0] <= (exitStart+exitButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg2, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(restartButtonImg1, (restartButtonWidth,buttonHeight)),(restartStart,buttonsY))
+            if click[0] == 1:
+                pygame.quit()
+                quit()
+
+        elif menuStart <= mouse[0] <= (menuStart+menuButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(restartButtonImg1, (restartButtonWidth, buttonHeight)),(restartStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg2, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+            if click[0] == 1:
+               game_loop(True,displayWidth,displayHeight)
+
+        else:
+            gameDisplay.blit(pygame.transform.scale(restartButtonImg1, (restartButtonWidth,buttonHeight)),(restartStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(exitButtonImg1, (exitButtonWidth,buttonHeight)),(exitStart,buttonsY))
+            gameDisplay.blit(pygame.transform.scale(menuButtonImg1, (menuButtonWidth, buttonHeight)),(menuStart,buttonsY))
+
+        pygame.display.update()
+        clock.tick(60)
+
+
+def displayScore(score,displayWidth,displayHeight):
+    font = pygame.font.SysFont(None, displayWidth//30)
     text = font.render("Your Score : " +str(score), True, white)
-    gameDisplay.blit(text, (20,15))
+    gameDisplay.blit(text, (displayWidth//50,displayHeight/40))
 
 
-def text_objects(text, font):
+def displayCoins(coins,displayWidth,displayHeight):
+    font = pygame.font.SysFont(None, displayWidth//30)
+    text = font.render(" : " +str(coins), True, white)
+    gameDisplay.blit(text, (displayWidth//3,displayHeight/40))
+
+
+def textObjects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
 def message_display(text):
-    largeText = pygame.font.Font("Arial", 50)
-    TextSurf, TextRect = text_objects(text, largeText)
-    TextRect.center = ((display_width//2)(display_height//2))
+    largeText = pygame.font.Font("freesansbold.ttf", 50)
+    TextSurf, TextRect = textObjects(text, largeText)
+    TextRect.center = ((displayWidth//2),(displayHeight//2))
     gameDisplay.blit(TextSurf, TextRect)
 
     pygame.display.update()
 
     time.sleep(2)
 
-    game_loop()
+    gameIntro(displayWidth, displayHeight)
 
 
-def crash():
-    message_display("You Crashed")
-
+##def crash():
+##    message_display("You Crashed")
 
 ###############################################################################
 
+def game_loop(x,displayWidth = 1000, displayHeight = 650):
 
-def game_loop():
+    nemoWidth = round(displayWidth/12)
+    nemoHeight = round(nemoWidth/2)
 
-    shark1Width = random.randint(280,320)
-    shark1Height = round(shark1Width/2)
+    goldFishWidth = round(displayWidth/16)
+    goldFishHeight = round(goldFishWidth/2)
 
-    shark2Width = random.randint(280,320)
-    shark2Height = round(shark2Width/2)
-
-    shark3Width = random.randint(280,320)
-    shark3Height = round(shark3Width/2)
-
-    shark4Width = random.randint(280,320)
-    shark4Height = round(shark4Width/2)
-
-    sharkSmartWidth = random.randint(280,320)
-    sharkSmartHeight = round(sharkSmartWidth/2)
+    preyFishWidth = round(displayWidth/22)
+    preyFishHeight = round(preyFishWidth/2)
 
     pygame.mixer.music.play(-1)
 
+    sharksImg = [shark1Img, shark2Img, shark3Img, shark4Img]*2
+
+    sharksWidth = []
+    sharksHeight = []
+    sharksStarty = []
+    sharksStartx = []
+    sharksSpeed = []
+
+    for i in range(8):
+        sharksWidth += [random.randint(displayWidth//5,displayWidth//4)]
+        sharksHeight += [sharksWidth[i]//2]
+        sharksSpeed += [random.uniform(2,8)]
+        sharksStartx += [displayWidth]
+        sharksStarty += [random.randint(-sharksHeight[i], displayHeight)]
 
 ###############################################################################
 
-
-    bubble1LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-    bubble1LargeStarty = displayHeight+bubbleLargeHeight
-    bubble1LargeSpeed = random.randint(3,4)
-
-    bubble2LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-    bubble2LargeStarty = displayHeight+bubbleLargeHeight
-    bubble2LargeSpeed = random.randint(3,4)
-
-    bubble3LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-    bubble3LargeStarty = displayHeight+bubbleLargeHeight
-    bubble3LargeSpeed = random.randint(3,4)
-
-
-    bubble1MediumStartx = random.randint(0, displayWidth-bubbleMediumWidth)
-    bubble1MediumStarty = displayHeight+bubbleMediumHeight
-    bubble1MediumSpeed = random.randint(2,3)
-
-    bubble2MediumStartx = random.randint(0, displayWidth-bubbleMediumWidth)
-    bubble2MediumStarty = displayHeight+bubbleMediumHeight
-    bubble2MediumSpeed = random.randint(2,3)
-
-    bubble3MediumStartx = random.randint(0, displayWidth-bubbleMediumWidth)
-    bubble3MediumStarty = displayHeight+bubbleMediumHeight
-    bubble3MediumSpeed = random.randint(2,3)
-
-
-    bubble1SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-    bubble1SmallStarty = displayHeight+bubbleSmallHeight
-    bubble1SmallSpeed = random.randint(1,2)
-
-    bubble2SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-    bubble2SmallStarty = displayHeight+bubbleSmallHeight
-    bubble2SmallSpeed = random.randint(1,2)
-
-    bubble3SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-    bubble3SmallStarty = displayHeight+bubbleSmallHeight
-    bubble3SmallSpeed = random.randint(1,2)
-
-
-###############################################################################
-
-
-    shark1Starty = random.randint(-shark1Height, displayHeight)
-    shark1Speed = random.randint(3,10)
-    shark1Startx = displayWidth + shark1Width
-
-    shark2Starty = random.randint(-shark2Height, displayHeight)
-    shark2Speed = random.randint(3,10)
-    shark2Startx = displayWidth + shark2Width
-
-    shark3Starty = random.randint(-shark3Height, displayHeight)
-    shark3Speed = random.randint(3,10)
-    shark3Startx = displayWidth + shark3Width
-
-    shark4Starty = random.randint(-shark4Height, displayHeight)
-    shark4Speed = random.randint(3,10)
-    shark4Startx = displayWidth + shark4Width
-
-
+    sharkSmartWidth = random.randint(displayWidth//5,displayWidth//4)
+    sharkSmartHeight = round(sharkSmartWidth/2)
     sharkSmartStarty = random.randint(-sharkSmartHeight, displayHeight)
-    sharkSmartSpeed = random.randint(3,8)
+    sharkSmartSpeed = random.uniform(2,8)
     sharkSmartStartx = displayWidth + sharkSmartWidth
 
-
 ###############################################################################
 
+    bubblesSpeed = []
+    bubblesStartx = []
+    bubblesStarty = [displayHeight]*15
+
+    for a in range(3):
+        for b in range(5):
+            bubblesSpeed += [random.uniform(a+0.5,a+1.5)]
+
+    for i in range(15):
+        bubblesStartx += [random.randint(0, displayWidth)]
+
+###############################################################################
 
     goldFishStarty = random.randint(-goldFishHeight, displayHeight)
-    goldFishSpeed = random.randint(8,12)
+    goldFishSpeed = random.uniform(5,10)
     goldFishStartx = displayWidth + goldFishWidth
-
-
-    blackFishStarty = random.randint(-preyFishHeight, displayHeight)
-    blackFishSpeed = random.randint(4,10)
-    blackFishStartx = displayWidth + preyFishWidth
-
-    redFishStarty = random.randint(-preyFishHeight, displayHeight)
-    redFishSpeed = random.randint(4,10)
-    redFishStartx = displayWidth + preyFishWidth
-
-    yellowFishStarty = random.randint(-preyFishHeight, displayHeight)
-    yellowFishSpeed = random.randint(4,10)
-    yellowFishStartx = displayWidth + preyFishWidth
-
-    angelFishStarty = random.randint(-preyFishHeight, displayHeight)
-    angelFishSpeed = random.randint(4,10)
-    angelFishStartx = displayWidth + preyFishWidth
-
-    tunaFishStarty = random.randint(-preyFishHeight, displayHeight)
-    tunaFishSpeed = random.randint(4,10)
-    tunaFishStartx = displayWidth + preyFishWidth
-
 
 ###############################################################################
 
+    preysImg = [blackFishImg, redFishImg, yellowFishImg, tunaFishImg, angelFishImg]*2
 
-    x = (displayWidth * (0.5))
-    y = (displayHeight * (0.5))
+    preysWidth = []
+    preysHeight = []
+    preysStarty = []
+    preysStartx = []
+    preysSpeed = []
 
-    xMove = 0
-    yMove = 0
+    for i in range(10):
+        preysWidth += [random.randint(20,50)]
+        preysHeight += [preysWidth[i]//2]
+        preysStarty += [random.randint(-preysHeight[i],displayHeight)]
+        preysStartx += [displayWidth + preysWidth[i]]
+        preysSpeed += [random.uniform(2,8)]
+
+###############################################################################
+
+    nemox = (displayWidth * (0.5))
+    nemoy = (displayHeight * (0.5))
+
+    nemoMovex = 0
+    nemoMovey = 0
 
     score = 0
+    coins = 0
+    d = 0
 
     gameExit = False
+
+    gameIntro(displayWidth, displayHeight, x)
 
     while not gameExit:
 
@@ -395,176 +436,91 @@ def game_loop():
                 pygame.quit()
                 quit()
 
+            if event.type == pygame.VIDEORESIZE:
+                displayWidth = event.w
+                displayHeight = event.h
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    xMove = -5
+                    nemoMovex = -5
                 elif event.key == pygame.K_RIGHT:
-                    xMove = 5
+                    nemoMovex = 5
                 elif event.key == pygame.K_UP:
-                    yMove = -5
+                    nemoMovey = -5
                 elif event.key == pygame.K_DOWN:
-                    yMove = 5
+                    nemoMovey = 5
                 elif event.key == pygame.K_p:
-                    gamePause()
+                    gamePause(displayWidth, displayHeight)
 
             if event.type == pygame.KEYUP:
-               if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                   xMove = 0
+                if event.key == pygame.K_LEFT:
+                    nemoMovex = 0
+                if event.key == pygame.K_RIGHT:
+                    nemoMovex = 0
+
 
             if event.type == pygame.KEYUP:
                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                   yMove = 0
+                   nemoMovey = 0
 
 
-        x += xMove
-        y += yMove
+        nemox += nemoMovex
+        nemoy += nemoMovey
+
+##        if nemoMovex > 0:
+##            nemoMovex -= 0.1
+##
+##        if nemoMovex < 0:
+##            nemoMovex += 0.1
 
         gameDisplay.blit(pygame.transform.scale(bg, (displayWidth, displayHeight)), (0,0))
 
 
 ###############################################################################
 
-
-        bubbleLarge(bubble1LargeStartx, bubble1LargeStarty)
-        bubble1LargeStarty -= bubble1LargeSpeed
-
-        bubbleLarge(bubble2LargeStartx, bubble2LargeStarty)
-        bubble2LargeStarty -= bubble2LargeSpeed
-
-        bubbleLarge(bubble3LargeStartx, bubble3LargeStarty)
-        bubble3LargeStarty -= bubble3LargeSpeed
-
-
-        if bubble1LargeStarty < -bubbleLargeHeight:
-            bubble1LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-            bubble1LargeStarty = displayHeight+bubbleLargeHeight
-            bubble1LargeSpeed = random.randint(3,4)
-
-        if bubble2LargeStarty < -bubbleLargeHeight:
-            bubble2LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-            bubble2LargeStarty = displayHeight+bubbleLargeHeight
-            bubble2LargeSpeed = random.randint(3,4)
-
-        if bubble3LargeStarty < -bubbleLargeHeight:
-            bubble3LargeStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-            bubble3LargeStarty = displayHeight+bubbleLargeHeight
-            bubble3LargeSpeed = random.randint(3,4)
-
-
-        bubbleMedium(bubble1MediumStartx, bubble1MediumStarty)
-        bubble1MediumStarty -= bubble1MediumSpeed
-
-        bubbleMedium(bubble2MediumStartx, bubble2MediumStarty)
-        bubble2MediumStarty -= bubble2MediumSpeed
-
-        bubbleMedium(bubble3MediumStartx, bubble3MediumStarty)
-        bubble3MediumStarty -= bubble3MediumSpeed
-
-
-        if bubble1MediumStarty < -bubbleMediumHeight:
-            bubble1MediumStartx = random.randint(0, displayWidth-bubbleLargeWidth)
-            bubble1MediumStarty = displayHeight+bubbleLargeHeight
-            bubble1MediumSpeed = random.randint(2,3)
-
-        if bubble2MediumStarty < -bubbleMediumHeight:
-            bubble2MediumStartx = random.randint(0, displayWidth-bubbleMediumWidth)
-            bubble2MediumStarty = displayHeight+bubbleMediumHeight
-            bubble2MediumSpeed = random.randint(2,3)
-
-        if bubble3MediumStarty < -bubbleMediumHeight:
-            bubble3MediumStartx = random.randint(0, displayWidth-bubbleMediumWidth)
-            bubble3MediumStarty = displayHeight+bubbleMediumHeight
-            bubble3MediumSpeed = random.randint(2,3)
-
-
-        bubbleSmall(bubble1SmallStartx, bubble1SmallStarty)
-        bubble1SmallStarty -= bubble1SmallSpeed
-
-        bubbleSmall(bubble2SmallStartx, bubble2SmallStarty)
-        bubble2SmallStarty -= bubble2SmallSpeed
-
-        bubbleSmall(bubble3SmallStartx, bubble3SmallStarty)
-        bubble3SmallStarty -= bubble3SmallSpeed
-
-
-        if bubble1SmallStarty < -bubbleSmallHeight:
-            bubble1SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-            bubble1SmallStarty = displayHeight+bubbleSmallHeight
-            bubble1SmallSpeed = random.randint(1,2)
-
-        if bubble2SmallStarty < -bubbleSmallHeight:
-            bubble2SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-            bubble2SmallStarty = displayHeight+bubbleSmallHeight
-            bubble2SmallSpeed = random.randint(1,2)
-
-        if bubble3SmallStarty < -bubbleSmallHeight:
-            bubble3SmallStartx = random.randint(0, displayWidth-bubbleSmallWidth)
-            bubble3SmallStarty = displayHeight+bubbleSmallHeight
-            bubble3SmallSpeed = random.randint(1,2)
-
+        for i in range(15):
+            bubbles(bubblesStartx[i],bubblesStarty[i],round(2.5*bubblesSpeed[i]))
+            bubblesStarty[i] = bubblesStarty[i] - round(bubblesSpeed[i],2)
+            if bubblesStarty[i] < 0:
+                bubbleSound.play()
+                bubblesStarty[i] = displayHeight
+                bubblesStartx[i] = random.randint(0,displayWidth)
+                bubblesSpeed[i] = random.uniform(bubblesSpeed[i]//1,bubblesSpeed[i]//1 + 1)
 
 ###############################################################################
 
-
-        shark1(shark1Startx, shark1Starty, shark1Width, shark1Height)
-        shark1Startx -= shark1Speed
-
-        shark2(shark2Startx, shark2Starty, shark2Width, shark2Height)
-        shark2Startx -= shark2Speed
-
-        shark3(shark3Startx, shark3Starty, shark3Width, shark3Height)
-        shark3Startx -= shark3Speed
-
-        shark4(shark4Startx, shark4Starty, shark4Width, shark4Height)
-        shark4Startx -= shark4Speed
-
-
-        if shark1Startx < -shark1Width:
-            shark1Starty = random.randint(-shark1Height, displayHeight)
-            shark1Speed = random.randint(3,10)
-            shark1Startx = displayWidth + shark1Width
-
-
-        if shark2Startx < -shark2Width:
-            shark2Starty = random.randint(-shark2Height, displayHeight)
-            shark2Speed = random.randint(3,10)
-            shark2Startx = displayWidth + shark2Width
-
-
-        if shark3Startx < -shark3Width:
-            shark3Starty = random.randint(-shark3Height, displayHeight)
-            shark3Speed = random.randint(3,10)
-            shark3Startx = displayWidth + shark3Width
-
-
-        if shark4Startx < -shark4Width:
-            shark4Starty = random.randint(-shark4Height, displayHeight)
-            shark4Speed = random.randint(3,10)
-            shark4Startx = displayWidth + shark4Width
-
+        for i in range(8):
+            sharks(sharksStartx[i], sharksStarty[i], sharksWidth[i], sharksHeight[i], sharksImg[i])
+            sharksStartx[i] = sharksStartx[i] - round(sharksSpeed[i],2)
+            if sharksStartx[i] < -sharksWidth[i]:
+                sharksStartx[i] = displayWidth
+                sharksStarty[i] = random.randint(-sharksHeight[i], displayHeight)
+                sharksSpeed[i] = random.uniform(2,8)
+                sharksWidth[i] = random.randint(displayWidth//5,displayWidth//4)
+                sharksHeight[i] = sharksWidth[i]//2
 
 ###############################################################################
-
 
         sharkSmart(sharkSmartStartx, sharkSmartStarty, sharkSmartWidth, sharkSmartHeight)
         sharkSmartStartx -= sharkSmartSpeed
 
         if sharkSmartStartx < -sharkSmartWidth:
+            sharkSmartWidth = random.randint(displayWidth//5,displayWidth//4)
+            sharkSmartHeight = (sharkSmartWidth//2)
             sharkSmartStarty = random.randint(-sharkSmartHeight, displayHeight)
-            sharkSmartSpeed = random.randint(3,8)
+            sharkSmartSpeed = random.uniform(2,8)
             sharkSmartStartx = displayWidth + sharkSmartWidth
-
 
 ###############################################################################
 
-
-        goldFish(goldFishStartx, goldFishStarty)
+        goldFishWidth = round(displayWidth/16)
+        goldFishHeight = (goldFishWidth//2)
+        goldFish(goldFishStartx, goldFishStarty,goldFishWidth, goldFishHeight)
         goldFishStartx -= goldFishSpeed
 
         if goldFishStartx < -goldFishWidth:
             goldFishStarty = random.randint(-goldFishHeight, displayHeight)
-            goldFishSpeed = random.randint(8,12)
+            goldFishSpeed = random.uniform(5,10)
             goldFishStartx = displayWidth + goldFishWidth
 
         if goldFishStarty > displayHeight:
@@ -573,111 +529,90 @@ def game_loop():
         if goldFishStarty < -goldFishHeight:
             goldFishStarty = displayHeight
 
-
 ###############################################################################
 
+        preyFishWidth = round(displayWidth/22)
+        preyFishHeight = round(preyFishWidth/2)
 
-        blackFish(blackFishStartx, blackFishStarty)
-        blackFishStartx -= blackFishSpeed
-
-        if blackFishStartx < -preyFishWidth:
-            blackFishStarty = random.randint(0, displayHeight)
-            blackFishSpeed = random.randint(4,10)
-            blackFishStartx = displayWidth + preyFishWidth
-
-
-        yellowFish(yellowFishStartx, yellowFishStarty)
-        yellowFishStartx -= yellowFishSpeed
-
-        if yellowFishStartx < -preyFishWidth:
-            yellowFishStarty = random.randint(0, displayHeight)
-            yellowFishSpeed = random.randint(4,10)
-            yellowFishStartx = displayWidth + preyFishWidth
-
-
-        redFish(redFishStartx, redFishStarty)
-        redFishStartx -= redFishSpeed
-
-        if redFishStartx < -preyFishWidth:
-            redFishStarty = random.randint(0, displayHeight)
-            redFishSpeed = random.randint(4,10)
-            redFishStartx = displayWidth + preyFishWidth
-
-
-        angelFish(angelFishStartx, angelFishStarty)
-        angelFishStartx -= angelFishSpeed
-
-        if angelFishStartx < -preyFishWidth:
-            angelFishStarty = random.randint(0, displayHeight)
-            angelFishSpeed = random.randint(4,10)
-            angelFishStartx = displayWidth + preyFishWidth
-
-
-        tunaFish(tunaFishStartx, tunaFishStarty)
-        tunaFishStartx -= tunaFishSpeed
-
-        if tunaFishStartx < -preyFishWidth:
-            tunaFishStarty = random.randint(0, displayHeight)
-            tunaFishSpeed = random.randint(4,10)
-            tunaFishStartx = displayWidth + preyFishWidth
-
+        for i in range(10):
+            preyFish(preysStartx[i], preysStarty[i], preysImg[i], preysWidth[i], preysHeight[i])
+            preysStartx[i] = preysStartx[i] - preysSpeed[i]
+            if preysStartx[i] < -preysWidth[i]:
+                preysWidth[i] = random.randint(20,50)
+                preysHeight[i] = preysWidth[i]//2
+                preysStarty[i] = random.randint(-preysHeight[i],displayHeight)
+                preysStartx[i] = displayWidth + preysWidth[i]
+                preysSpeed[i] = random.uniform(2,8)
 
 ###############################################################################
-
 
         increaseWidth = round(score//10)
         increaseHeight = round(increaseWidth/2)
+        nemoWidth = round(displayWidth/12)
+        nemoHeight = (nemoWidth//2)
 
-        fish(x,y,increaseWidth,increaseHeight)
+        Nemo(nemox,nemoy,nemoWidth,nemoHeight,increaseWidth,increaseHeight)
 
-        if x > displayWidth:
-            x = -fishWidth
+        if nemox > displayWidth:
+            nemox = -nemoWidth
 
-        if x < -fishWidth:
-            x = displayWidth
+        if nemox < -nemoWidth:
+            nemox = displayWidth
 
-        if y > displayHeight:
-            y = -fishHeight
+        if nemoy > displayHeight:
+            nemoy = -nemoHeight
 
-        if y < -fishHeight:
-            y = displayHeight
+        if nemoy < -nemoHeight:
+            nemoy = displayHeight
 
-        score += 0.05
+        score += 0.0001
 
+        nemoImg1 = pygame.transform.scale(nemoImg, (nemoWidth,nemoHeight))
+        nemoImg1 = nemoImg1.convert_alpha()
+        nemoMask = pygame.mask.from_surface(nemoImg1)
+
+        sharkSmartImg1 = pygame.transform.scale(sharkSmartImg, (sharkSmartWidth,sharkSmartHeight))
+        sharkSmartImg1 = sharkSmartImg1.convert_alpha()
+        sharkSmartMask = pygame.mask.from_surface(sharkSmartImg1)
+
+        offset = (round(nemox - sharkSmartStartx), round(nemoy - sharkSmartStarty) )
+        collision = sharkSmartMask.overlap(nemoMask,offset)
+        if collision:
+            biteSound.play()
+            crash(displayWidth, displayHeight)
 
 ###############################################################################
 
-
-        if ((x + fishWidth - goldFishStartx)**(2) + (y + fishHeight/2 - goldFishStarty - goldFishHeight/2)**(2))**(1/2) <= 300:
-            if (goldFishStarty + goldFishHeight/2) >= (y + goldFishHeight/2):
-                goldFishStarty += 4
-            if (goldFishStarty + goldFishHeight/2) < (y + goldFishHeight/2):
-                goldFishStarty -= 4
-
+        if ((nemox + nemoWidth - goldFishStartx)**(2) + (nemoy + nemoHeight/2 - goldFishStarty - goldFishHeight/2)**(2))**(1/2) <= 150:
+            if (goldFishStarty + goldFishHeight/2) >= (nemoy + goldFishHeight/2):
+                goldFishStarty += 3
+            if (goldFishStarty + goldFishHeight/2) < (nemoy + goldFishHeight/2):
+                goldFishStarty -= 3
 
 ###############################################################################
 
-
-        if ((x + fishWidth - sharkSmartStartx)**(2) + (y + fishHeight/2 - sharkSmartStarty - sharkSmartHeight/2)**(2))**(1/2) <= 700 and (sharkSmartStartx + sharkSmartWidth) >= x:
-            if (sharkSmartStarty + sharkSmartHeight/2) >= (y + fishHeight/2):
+        if ((nemox + nemoWidth - sharkSmartStartx)**(2) + (nemoy + nemoHeight/2 - sharkSmartStarty - sharkSmartHeight/2)**(2))**(1/2) <= 400\
+           and (sharkSmartStartx + sharkSmartWidth) >= nemox:
+            if (sharkSmartStarty + sharkSmartHeight/2) >= (nemoy + nemoHeight/2):
                 sharkSmartStarty -= 2
-            if (sharkSmartStarty + sharkSmartHeight/2) < (y + fishHeight/2):
+            if (sharkSmartStarty + sharkSmartHeight/2) < (nemoy + nemoHeight/2):
                 sharkSmartStarty += 2
 
-
 ###############################################################################
 
+        displayScore(round(score), displayWidth, displayHeight)
 
-        displayScore(round(score))
+        displayCoins(coins, displayWidth, displayHeight)
+
+        goldCoin(displayWidth, displayHeight)
 
         pygame.display.update()
 
         clock.tick(60)
 
+##gameIntro(displayWidth, displayHeight)
 
-gameIntro()
-
-game_loop()
+game_loop(True, displayWidth, displayHeight)
 
 pygame.quit()
 
