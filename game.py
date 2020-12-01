@@ -76,10 +76,10 @@ goldCoinImg = pygame.image.load("goldcoin.png")
 ripImg = pygame.image.load("rip.png")
 bubbleSound = mixer.Sound("bubbles.wav")
 eatSound = mixer.Sound("eat.wav")
-bubbleSound.set_volume(0.01)
+bubbleSound.set_volume(0.02)
 biteSound = mixer.Sound("bite.mp3")
 mixer.music.load("waterSound.mp3")
-pygame.mixer.music.set_volume(0.03)
+pygame.mixer.music.set_volume(0.02)
 
 ###############################################################################
 
@@ -324,7 +324,7 @@ def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
                     intro = False
                 if event.key == pygame.K_i:
                     time.sleep(0.1)
-                    gameInstructions(displayWidth, displayHeight, c)
+                    gameInstructions(displayWidth, displayHeight, coins, c, upgradeSpeed)
             elif event.type == pygame.VIDEORESIZE:
                 displayWidth = event.w
                 displayHeight = event.h
@@ -369,6 +369,7 @@ def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
             time.sleep(0.01)
             pygame.display.update()
             if click[0] == 1:
+                time.sleep(0.1)
                 game_loop(False, displayWidth, displayHeight, score, coins, upgradeSpeed)
 
         elif exitStart <= mouse[0] <= (exitStart+exitButtonWidth) and buttonsY <= mouse[1] <= (buttonsY+buttonHeight):
@@ -394,7 +395,7 @@ def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
             gameDisplay.blit(pygame.transform.scale(
                 instructionsButtonImg1, (instructionsButtonWidth, buttonHeight)), (0, 0))
             if click[0] == 1:
-                time.sleep(0.1)
+                time.sleep(0.2)
                 gameShop(displayWidth, displayHeight, coins, c, upgradeSpeed)
 
         elif 0 <= mouse[0] <= instructionsButtonWidth and 0 <= mouse[1] <= buttonHeight:
@@ -871,6 +872,7 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
                         coins, c, upgradeSpeed)
                 elif event.key == pygame.K_q:
                     score += 100
+                    coins += 100
                 elif event.key == pygame.K_w:
                     score -= 100
 
