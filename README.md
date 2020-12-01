@@ -3,7 +3,9 @@ Final Project
 
 See a video description at: 
 
-######################################################################################## Download the Folder 15112 Game.
+######################################################################################## 
+
+Download the Folder Term-Project.
 
 Open and run game.py for the game.
 
