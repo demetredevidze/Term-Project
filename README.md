@@ -1,9 +1,9 @@
 15-112
 Final Project
 
-See a video description at: 
+See a video description at: https://youtu.be/YDntmTYkaYk 
 
-######################################################################################## 
+***
 
 Download the Folder Term-Project.
 
