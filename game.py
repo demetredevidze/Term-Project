@@ -32,15 +32,15 @@ clock = pygame.time.Clock()
 # loading all the neccesary files at the beginning
 nemoImgs = []
 for i in range(8):
-    filename = "nemo" + str(i+1) + ".png"
+    filename = "pics/nemo" + str(i+1) + ".png"
     nemoImgs += [pygame.image.load(filename)]
 smartSharkImgs = []
 for i in range(8):
-    fileName = "smartShark" + str(i+1) + ".png"
+    fileName = "pics/smartShark" + str(i+1) + ".png"
     smartSharkImgs += [pygame.image.load(fileName)]
 goldFishImgs = []
 for i in range(8):
-    fileName = "goldFish" + str(i+1) + ".png"
+    fileName = "pics/goldFish" + str(i+1) + ".png"
     goldFishImgs += [pygame.image.load(fileName)]
 <<<<<<< HEAD
 bgs = []
@@ -49,44 +49,44 @@ for i in range(75):
     bgs += [pygame.image.load(fileName)]
 =======
 
-bgImg = pygame.image.load("back.jpg")
+bgImg = pygame.image.load("pics/back.jpg")
 >>>>>>> 475b4d8 (fix_some_bugs)
-shark1Img = pygame.image.load("shark1.png")
-shark2Img = pygame.image.load("shark2.png")
-shark3Img = pygame.image.load("shark3.png")
-shark4Img = pygame.image.load("shark4.png")
-bubbleImg = pygame.image.load("bubble.png")
-blackFishImg = pygame.image.load("blackfish.png")
-redFishImg = pygame.image.load("redfish.png")
-yellowFishImg = pygame.image.load("yellowfish.png")
-tunaFishImg = pygame.image.load("tunafish.png")
-angelFishImg = pygame.image.load("angelfish.png")
-startButtonImg1 = pygame.image.load("startButton1.png")
-startButtonImg2 = pygame.image.load("startButton2.png")
-exitButtonImg1 = pygame.image.load("exitButton1.png")
-exitButtonImg2 = pygame.image.load("exitButton2.png")
-continueButtonImg1 = pygame.image.load("continueButton1.png")
-continueButtonImg2 = pygame.image.load("continueButton2.png")
-restartButtonImg1 = pygame.image.load("restart1.png")
-restartButtonImg2 = pygame.image.load("restart2.png")
-menuButtonImg1 = pygame.image.load("menu1.png")
-menuButtonImg2 = pygame.image.load("menu2.png")
-shopButtonImg1 = pygame.image.load("shop1.png")
-shopButtonImg2 = pygame.image.load("shop2.png")
-instructionsButtonImg1 = pygame.image.load("instructionsButton1.png")
-instructionsButtonImg2 = pygame.image.load("instructionsButton2.png")
+shark1Img = pygame.image.load("pics/shark1.png")
+shark2Img = pygame.image.load("pics/shark2.png")
+shark3Img = pygame.image.load("pics/shark3.png")
+shark4Img = pygame.image.load("pics/shark4.png")
+bubbleImg = pygame.image.load("pics/bubble.png")
+blackFishImg = pygame.image.load("pics/blackfish.png")
+redFishImg = pygame.image.load("pics/redfish.png")
+yellowFishImg = pygame.image.load("pics/yellowfish.png")
+tunaFishImg = pygame.image.load("pics/tunafish.png")
+angelFishImg = pygame.image.load("pics/angelfish.png")
+startButtonImg1 = pygame.image.load("pics/startButton1.png")
+startButtonImg2 = pygame.image.load("pics/startButton2.png")
+exitButtonImg1 = pygame.image.load("pics/exitButton1.png")
+exitButtonImg2 = pygame.image.load("pics/exitButton2.png")
+continueButtonImg1 = pygame.image.load("pics/continueButton1.png")
+continueButtonImg2 = pygame.image.load("pics/continueButton2.png")
+restartButtonImg1 = pygame.image.load("pics/restart1.png")
+restartButtonImg2 = pygame.image.load("pics/restart2.png")
+menuButtonImg1 = pygame.image.load("pics/menu1.png")
+menuButtonImg2 = pygame.image.load("pics/menu2.png")
+shopButtonImg1 = pygame.image.load("pics/shop1.png")
+shopButtonImg2 = pygame.image.load("pics/shop2.png")
+instructionsButtonImg1 = pygame.image.load("pics/instructionsButton1.png")
+instructionsButtonImg2 = pygame.image.load("pics/instructionsButton2.png")
 <<<<<<< HEAD
 instructionsImg = pygame.image.load("instructions.png")
 =======
-instructionsImg = pygame.image.load("instructions.jpg")
+instructionsImg = pygame.image.load("pics/instructions.jpg")
 >>>>>>> 475b4d8 (fix_some_bugs)
-backButtonImg1 = pygame.image.load("backButton1.png")
-backButtonImg2 = pygame.image.load("backButton2.png")
-upgradeButtonImg1 = pygame.image.load("upgradeButton1.png")
-upgradeButtonImg2 = pygame.image.load("upgradeButton2.png")
-upgradeButtonImg3 = pygame.image.load("upgradeButton3.png")
-goldCoinImg = pygame.image.load("goldcoin.png")
-ripImg = pygame.image.load("rip.png")
+backButtonImg1 = pygame.image.load("pics/backButton1.png")
+backButtonImg2 = pygame.image.load("pics/backButton2.png")
+upgradeButtonImg1 = pygame.image.load("pics/upgradeButton1.png")
+upgradeButtonImg2 = pygame.image.load("pics/upgradeButton2.png")
+upgradeButtonImg3 = pygame.image.load("pics/upgradeButton3.png")
+goldCoinImg = pygame.image.load("pics/goldcoin.png")
+ripImg = pygame.image.load("pics/rip.png")
 bubbleSound = mixer.Sound("bubbles.wav")
 eatSound = mixer.Sound("eat.wav")
 bubbleSound.set_volume(0.02)
