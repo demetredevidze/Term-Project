@@ -11,7 +11,9 @@ Open and run game.py for the game.
 
 ######################################################################################## 
 
-Python needs pygame to be installed. If you dont have it yet, use pip command to istall it.
+Python needs pygame to be installed. If you dont have it yet, use pip command:
+
+pip install pygame
 
 ########################################################################################
 
