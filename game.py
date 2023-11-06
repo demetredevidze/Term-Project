@@ -15,7 +15,11 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 displayWidth = 1000
 displayHeight = 600
+<<<<<<< HEAD
 FPS = 60
+=======
+FPS = 50
+>>>>>>> 475b4d8 (fix_some_bugs)
 score = 0
 coins = 0
 upgradeSpeed = 0
@@ -38,10 +42,15 @@ goldFishImgs = []
 for i in range(8):
     fileName = "goldFish" + str(i+1) + ".png"
     goldFishImgs += [pygame.image.load(fileName)]
+<<<<<<< HEAD
 bgs = []
 for i in range(75):
     fileName = "frame_" + str(i) + "_delay-0.07s.gif"
     bgs += [pygame.image.load(fileName)]
+=======
+
+bgImg = pygame.image.load("back.jpg")
+>>>>>>> 475b4d8 (fix_some_bugs)
 shark1Img = pygame.image.load("shark1.png")
 shark2Img = pygame.image.load("shark2.png")
 shark3Img = pygame.image.load("shark3.png")
@@ -66,7 +75,11 @@ shopButtonImg1 = pygame.image.load("shop1.png")
 shopButtonImg2 = pygame.image.load("shop2.png")
 instructionsButtonImg1 = pygame.image.load("instructionsButton1.png")
 instructionsButtonImg2 = pygame.image.load("instructionsButton2.png")
+<<<<<<< HEAD
 instructionsImg = pygame.image.load("instructions.png")
+=======
+instructionsImg = pygame.image.load("instructions.jpg")
+>>>>>>> 475b4d8 (fix_some_bugs)
 backButtonImg1 = pygame.image.load("backButton1.png")
 backButtonImg2 = pygame.image.load("backButton2.png")
 upgradeButtonImg1 = pygame.image.load("upgradeButton1.png")
@@ -347,7 +360,11 @@ def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
         # c stands for count and tracks how many frames have been passed
         # so to display each shot of animation for a specific number of frames
         gameDisplay.blit(pygame.transform.scale(
+<<<<<<< HEAD
             bgs[(c%75)//25], (displayWidth, displayHeight)), (0, 0))
+=======
+            bgImg, (displayWidth, displayHeight)), (0, 0))
+>>>>>>> 475b4d8 (fix_some_bugs)
         largeText = pygame.font.Font("freesansbold.ttf", displayWidth//20)
         TextSurf, TextRect = textObjects("Welcome to Nemo", largeText)
         TextRect.center = ((displayWidth//2), (displayHeight//2.5))
@@ -462,7 +479,11 @@ def gamePause(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
         menuStart = displayWidth//2 - menuButtonWidth//2
 
         gameDisplay.blit(pygame.transform.scale(
+<<<<<<< HEAD
             bgs[(c%75)//25], (displayWidth, displayHeight)), (0, 0))
+=======
+            bgImg, (displayWidth, displayHeight)), (0, 0))
+>>>>>>> 475b4d8 (fix_some_bugs)
 
         displayScore(round(score), displayWidth, displayHeight)
         displayCoins(round(coins), displayWidth, displayHeight)
@@ -563,7 +584,11 @@ def crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
         menuStart = displayWidth//2 - menuButtonWidth//2
 
         gameDisplay.blit(pygame.transform.scale(
+<<<<<<< HEAD
             bgs[(c%75)//25], (displayWidth, displayHeight)), (0, 0))
+=======
+            bgImg, (displayWidth, displayHeight)), (0, 0))
+>>>>>>> 475b4d8 (fix_some_bugs)
 
         displayScore(round(score), displayWidth, displayHeight)
         displayCoins(round(coins), displayWidth, displayHeight)
@@ -646,6 +671,7 @@ def gameInstructions(displayWidth, displayHeight, coins, c, upgradeSpeed):
 
         goldFishWidth = displayWidth//10
         goldFishHeight = goldFishWidth//2
+<<<<<<< HEAD
         fishx = displayWidth - round(displayWidth/4)
         fishy = displayHeight - round(displayHeight/2.5)
 
@@ -658,6 +684,20 @@ def gameInstructions(displayWidth, displayHeight, coins, c, upgradeSpeed):
         nemoHeight = nemoWidth//2
         nemox = displayWidth - round(displayWidth/2)
         nemoy = displayHeight - round(displayHeight/4.8)
+=======
+        fishx = displayWidth - round(displayWidth/4.3)
+        fishy = displayHeight - round(displayHeight/2.25)
+
+        sharkWidth = displayWidth//5
+        sharkHeight = sharkWidth//2
+        sharkx = displayWidth - round(displayWidth/1.7)
+        sharky = displayHeight - round(displayHeight/1.52)
+
+        nemoWidth = displayWidth//10
+        nemoHeight = nemoWidth//2
+        nemox = displayWidth - round(displayWidth/2.9)
+        nemoy = displayHeight - round(displayHeight/3.5)
+>>>>>>> 475b4d8 (fix_some_bugs)
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -715,7 +755,11 @@ def gameShop(displayWidth, displayHeight, coins, c, upgradeSpeed):
                 displayHeight = event.h
 
         gameDisplay.blit(pygame.transform.scale(
+<<<<<<< HEAD
             bgs[(c%75)//25], (displayWidth, displayHeight)), (0, 0))
+=======
+            bgImg, (displayWidth, displayHeight)), (0, 0))
+>>>>>>> 475b4d8 (fix_some_bugs)
 
         displayCoins(round(coins), displayWidth, displayHeight)
 
@@ -921,7 +965,11 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
 
         score += 0.01
 
+<<<<<<< HEAD
         gameDisplay.blit(pygame.transform.scale(bgs[(c%75)//25],
+=======
+        gameDisplay.blit(pygame.transform.scale(bgImg,
+>>>>>>> 475b4d8 (fix_some_bugs)
             (displayWidth, displayHeight)), (0, 0))
 
 ###############################################################################
@@ -1018,8 +1066,12 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
             nemoImg1 = pygame.transform.scale(nemoImgs[(c%60)//8], (nemoWidth, nemoHeight))
             nemoImg2 = nemoImg1.convert_alpha()
             nemoMask = pygame.mask.from_surface(nemoImg2)
+<<<<<<< HEAD
 
         if flip == True:
+=======
+        else:
+>>>>>>> 475b4d8 (fix_some_bugs)
             nemoImg0 = pygame.transform.flip(nemoImgs[(c%60)//8], True, False)
             nemoImg1 = pygame.transform.scale(nemoImg0, (nemoWidth, nemoHeight))
             nemoImg2 = nemoImg1.convert_alpha()
@@ -1033,22 +1085,35 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
         goldFishImg1 = pygame.transform.scale(goldFishImgs[(c%60)//8],
             (goldFish.goldFishWidth,goldFish.goldFishHeight))
         goldFishImg2 = goldFishImg1.convert_alpha()
+<<<<<<< HEAD
         goldFishMask = nemoMask = pygame.mask.from_surface(goldFishImg2)
+=======
+        goldFishMask = pygame.mask.from_surface(goldFishImg2)
+>>>>>>> 475b4d8 (fix_some_bugs)
 
 ###############################################################################
 
         # offsets are basically checking if rectangles of objects overlap
         # if so they we start checking for pixels
+<<<<<<< HEAD
         offset1 = (round(nemox + increaseWidth - smartShark.x),round(nemoy +
             increaseHeight - smartShark.y))
+=======
+        offset1 = (round(nemox - smartShark.x),round(nemoy - smartShark.y))
+
+>>>>>>> 475b4d8 (fix_some_bugs)
         collision1 = smartSharkMask.overlap(nemoMask, offset1)
 
         if collision1:
             eatSound.play()
             crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed)
 
+<<<<<<< HEAD
         offset2 = (round(nemox + increaseWidth - goldFish.x),round(nemoy +
             increaseHeight - goldFish.y))
+=======
+        offset2 = (round(nemox - goldFish.x),round(nemoy - goldFish.y))
+>>>>>>> 475b4d8 (fix_some_bugs)
         collision2 = goldFishMask.overlap(nemoMask, offset2)
 
         if goldFish.eat == False:
@@ -1094,8 +1159,12 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
                 score += preyFish[i].preyFishWidth/15
                 coins += 1
 
+<<<<<<< HEAD
         for sharkImg in sharksImg:
             i = 0
+=======
+        for i, sharkImg in enumerate(sharksImg):
+>>>>>>> 475b4d8 (fix_some_bugs)
             sharksImg1 += [pygame.transform.scale(
                 sharkImg, (sharks[i].sharksWidth, sharks[i].sharksHeight))]
             if sharks[i].randSide == 0:
@@ -1104,11 +1173,18 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
                 sharksImg1[i] = pygame.transform.flip(sharksImg1[i], True, False)
                 sharksImg1[i] = sharksImg1[i].convert_alpha()
             sharksMasks += [pygame.mask.from_surface(sharksImg1[i])]
+<<<<<<< HEAD
             i += 1
 
         for i in range(8):
             offsetSharks += [(round(nemox + increaseWidth - sharks[i].x),
                               round(nemoy + increaseHeight - sharks[i].y))]
+=======
+
+        for i in range(8):
+            offsetSharks += [(round(nemox - sharks[i].x),
+                              round(nemoy + - sharks[i].y))]
+>>>>>>> 475b4d8 (fix_some_bugs)
             sharkCollisions += [sharksMasks[i]
                                 .overlap(nemoMask, offsetSharks[i])]
 
@@ -1116,6 +1192,11 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
             if sharkCollisions[i] and caught[i] == False:
                 eatSound.play()
                 crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed)
+<<<<<<< HEAD
+=======
+        
+        pygame.display.update()
+>>>>>>> 475b4d8 (fix_some_bugs)
 
 ###############################################################################
 
