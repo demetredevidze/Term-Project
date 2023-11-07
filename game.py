@@ -836,11 +836,11 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
 
 ###############################################################################
 
-    preysImg = [blackFishImg, redFishImg,yellowFishImg, tunaFishImg, angelFishImg]*2
-    eatPreys = [False]*10
+    preysImg = [blackFishImg, redFishImg,yellowFishImg, tunaFishImg, angelFishImg]*3
+    eatPreys = [False]*15
     # creating 10 objects of PreyFish class
     preyFish = []
-    for i in range(10):
+    for i in range(15):
         preyFish += [PreyFish(displayWidth,displayHeight,preysImg[i],eatPreys[i])]
 
 ###############################################################################
@@ -966,7 +966,7 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
 
 ###############################################################################
 
-        for i in range(10):
+        for i in range(15):
             preyFish[i].preysUpdate(displayWidth,displayHeight,eatPreys[i])
             eatPreys[i] = preyFish[i].eatPreys
 
@@ -1023,10 +1023,15 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
         # if nemo is close, smartshark adjusts its y location accordingly to chase nemo
         if ((nemox + nemoWidth - smartShark.x)**(2) + (nemoy + nemoHeight/2 - smartShark.y -
             smartShark.smartSharkHeight/2)**(2))**(1/2) <= displayWidth//2:
-            if (smartShark.y + smartShark.smartSharkHeight/2) >= (nemoy + nemoHeight/2):
+            smid = smartShark.y + smartShark.smartSharkHeight/2
+            nmid = nemoy + nemoHeight/2
+            if (smid - nmid)**2 <= 3:
+                pass
+            elif smid > nmid:
                 smartShark.y -= (round(displayHeight/240, 2) + upgradeSpeed)
             else:
                 smartShark.y += (round(displayHeight/240, 2) + upgradeSpeed)
+            
 
 ###############################################################################
 
@@ -1103,8 +1108,7 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
         offsetSharks = []
         sharkCollisions = []
 
-        for preyImg in preysImg:
-            i = 0
+        for i, preyImg in enumerate(preysImg):
             preysImg1 += [pygame.transform.scale(preyImg,
                 (preyFish[i].preyFishWidth, preyFish[i].preyFishHeight))]
             if preyFish[i].randSide == 0:
@@ -1113,14 +1117,13 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
                 preysImg1[i] = pygame.transform.flip(preysImg1[i], True, False)
                 preysImg1[i] = preysImg1[i].convert_alpha()
             preysMasks += [pygame.mask.from_surface(preysImg1[i])]
-            i += 1
 
-        for i in range(10):
+        for i in range(15):
             offset3 += [(round(nemox  - preyFish[i].x),
                          round(nemoy  - preyFish[i].y))]
             collision3 += [preysMasks[i].overlap(nemoMask, offset3[i])]
 
-        for i in range(10):
+        for i in range(15):
             if collision3[i] != None and eatPreys[i] == False:
                 biteSound.play()
                 eatPreys[i] = True
