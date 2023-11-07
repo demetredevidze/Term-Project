@@ -307,6 +307,10 @@ def textObjects(text, font):
 
 def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
 
+    bubbles = []
+    for i in range(25):
+        bubbles += [Bubble(displayWidth,displayHeight)]
+
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -346,11 +350,16 @@ def gameIntro(displayWidth, displayHeight, c, coins, intro, upgradeSpeed):
         # so to display each shot of animation for a specific number of frames
         gameDisplay.blit(pygame.transform.scale(
             bgImg, (displayWidth, displayHeight)), (0, 0))
+        
+        for i in range(25):
+            bubbles[i].bubbleUpdate(displayWidth,displayHeight)
+        
         largeText = pygame.font.Font("freesansbold.ttf", displayWidth//20)
         TextSurf, TextRect = textObjects("Welcome to Nemo", largeText)
         TextRect.center = ((displayWidth//2), (displayHeight//2.5))
         gameDisplay.blit(TextSurf, TextRect)
         displayCoins(round(coins), displayWidth, displayHeight)
+
 
         click = pygame.mouse.get_pressed()
         c += 1
@@ -428,6 +437,10 @@ def gamePause(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
 
     pause = True
 
+    bubbles = []
+    for i in range(25):
+        bubbles += [Bubble(displayWidth,displayHeight)]
+
     while pause:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -445,7 +458,7 @@ def gamePause(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
             if event.type == pygame.VIDEORESIZE:
                 displayWidth = event.w
                 displayHeight = event.h
-
+        
         mouse = pygame.mouse.get_pos()
 
         startButtonWidth = displayWidth//5
@@ -461,6 +474,9 @@ def gamePause(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
 
         gameDisplay.blit(pygame.transform.scale(
             bgImg, (displayWidth, displayHeight)), (0, 0))
+        
+        for i in range(25):
+            bubbles[i].bubbleUpdate(displayWidth,displayHeight)
 
         displayScore(round(score), displayWidth, displayHeight)
         displayCoins(round(coins), displayWidth, displayHeight)
@@ -526,6 +542,10 @@ def crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
 
     crash = True
 
+    bubbles = []
+    for i in range(25):
+        bubbles += [Bubble(displayWidth,displayHeight)]
+
     while crash:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -547,7 +567,7 @@ def crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
             if event.type == pygame.VIDEORESIZE:
                 displayWidth = event.w
                 displayHeight = event.h
-
+        
         mouse = pygame.mouse.get_pos()
 
         buttonHeight = displayHeight//12
@@ -562,6 +582,9 @@ def crash(displayWidth, displayHeight, score, coins, c, upgradeSpeed):
 
         gameDisplay.blit(pygame.transform.scale(
             bgImg, (displayWidth, displayHeight)), (0, 0))
+        
+        for i in range(25):
+            bubbles[i].bubbleUpdate(displayWidth,displayHeight)
 
         displayScore(round(score), displayWidth, displayHeight)
         displayCoins(round(coins), displayWidth, displayHeight)
@@ -629,6 +652,10 @@ def gameInstructions(displayWidth, displayHeight, coins, c, upgradeSpeed):
 
     instructions = True
 
+    bubbles = []
+    for i in range(25):
+        bubbles += [Bubble(displayWidth,displayHeight)]
+
     while instructions:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -663,6 +690,9 @@ def gameInstructions(displayWidth, displayHeight, coins, c, upgradeSpeed):
 
         gameDisplay.blit(pygame.transform.scale(
             instructionsImg, (displayWidth, displayHeight)), (0, 0))
+        
+        for i in range(25):
+            bubbles[i].bubbleUpdate(displayWidth,displayHeight)
 
         gameDisplay.blit(pygame.transform.scale(goldFishImgs[(c%60)//8],
                 (goldFishWidth, goldFishHeight)), (fishx, fishy))
@@ -699,6 +729,10 @@ def gameShop(displayWidth, displayHeight, coins, c, upgradeSpeed):
 
     shop = True
 
+    bubbles = []
+    for i in range(25):
+        bubbles += [Bubble(displayWidth,displayHeight)]
+
     while shop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -714,6 +748,9 @@ def gameShop(displayWidth, displayHeight, coins, c, upgradeSpeed):
 
         gameDisplay.blit(pygame.transform.scale(
             bgImg, (displayWidth, displayHeight)), (0, 0))
+        
+        for i in range(25):
+            bubbles[i].bubbleUpdate(displayWidth,displayHeight)
 
         displayCoins(round(coins), displayWidth, displayHeight)
 
@@ -794,7 +831,7 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
 
     # creating 15 objects of Bubble class
     bubbles = []
-    for i in range(15):
+    for i in range(25):
         bubbles += [Bubble(displayWidth,displayHeight)]
 
 ###############################################################################
@@ -924,7 +961,7 @@ def game_loop(intro, displayWidth, displayHeight, score, coins, upgradeSpeed):
 
 ###############################################################################
 
-        for i in range(15):
+        for i in range(25):
             bubbles[i].bubbleUpdate(displayWidth,displayHeight)
 
 ###############################################################################
